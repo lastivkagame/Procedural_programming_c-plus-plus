@@ -1,0 +1,47 @@
+#include <iostream>
+?
+using namespace std;
+?
+void func1() // тип_повертаємого_результату назва(параметри)
+{
+	cout << "func1" << endl;
+}
+?
+void func2()
+{
+	cout << "func2" << endl;
+}
+?
+char func3(int a)
+{
+	return (char)a;
+}
+void main()
+{
+	void (*pFunc)(); // вказівник на функцію із сигнатурою void FuncName()
+	pFunc = func1;// присвоюємо вказівнику адресу конкретної функції func1
+	// pFunc = func3; /// ERROR!!! Не співпадає сигнатура вказівника та функції!
+	char (*pFuncChar)(int);  // вказівник на функцію із сигнатурою char FuncName(int)
+	// 
+	pFuncChar = func3; // присвоюємо вказівнику адресу конкретної функції func3
+	int choise;
+	cin >> choise;
+	switch (choise)
+	{
+	case 1: 
+		pFunc = func1; // якщо ввели 1 - привоюємо вказівнику адресу функції func1
+		break;
+	case 2: 
+		pFunc = func2; // якщо ввели 2 - привоюємо вказівнику адресу функції func2
+		break;
+	case 3:
+		cout << pFuncChar(65) << endl; // якщо ввели 3 - виклик функції func3 через вказівник
+		return;
+	}
+	pFunc(); // виклик функції по вказівнику
+?
+	system("pause");
+}
+
+
+
